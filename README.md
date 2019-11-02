@@ -1,11 +1,11 @@
-**The Hard Mode version can be found here: https://github.com/teralove/vshm-lakan-guide**
+**The Hard Mode version can be found here: https://github.com/patricksantozz/vshm-lakan-guide**
 
 **Bug: Rarily the first "next" message after 30% is wrong. The immediate calls are always correct**
 
 # VSNM Lakan Guide
 Calls out mechanics during the fight.
 
-![Screenshot](https://github.com/teralove/vsnm-lakan-guide/blob/master/vsnm-lakan-guide-preview.png)
+![Screenshot](https://github.com/patricksantozz/vsnm-lakan-guide/blob/master/vsnm-lakan-guide-preview.png)
 
 Available messages:
 
