@@ -34,7 +34,7 @@ const InversedAction = {
 const ShieldWarningTrigger = 0.35; //boss hp%
 const ShieldWarningMessage = 'Ring soon, get ready to dodge';
 
-module.exports = function VSNMLakanGuide(dispatch) {
+module.exports = function VSNMLakanGuide(mod) {
 	
 	let enabled = true,
 		sendToParty = false,
@@ -56,19 +56,19 @@ module.exports = function VSNMLakanGuide(dispatch) {
 			return false;
 		}
 	}
-	dispatch.hook('C_CHAT', 1, chatHook)	
-	dispatch.hook('C_WHISPER', 1, chatHook)
+	mod.hook('C_CHAT', 1, chatHook)	
+	mod.hook('C_WHISPER', 1, chatHook)
   	
-	// slash support
+	// command support
 	try {
-		const Slash = require('slash')
-		const slash = new Slash(dispatch)
-		slash.on('vsnm-lakan', args => toggleModule())
-		slash.on('vsnmlakan', args => toggleModule())
-		slash.on('vsnm-lakan.party', args => toggleSentMessages())
-		slash.on('vsnmlakan.party', args => toggleSentMessages())
+		const command = require('command')
+		const command = new command(mod)
+		command.on('vsnm-lakan', args => toggleModule())
+		command.on('vsnmlakan', args => toggleModule())
+		command.on('vsnm-lakan.party', args => toggleSentMessages())
+		command.on('vsnmlakan.party', args => toggleSentMessages())
 	} catch (e) {
-		// do nothing because slash is optional
+		// do nothing because command is optional
 	}
 			
 	function toggleModule() {
@@ -81,7 +81,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		systemMessage((sendToParty ? 'Messages will be sent to the party' : 'Only you will see messages'));
 	}	
 	
-	dispatch.hook('S_DUNGEON_EVENT_MESSAGE', 1, (event) => {	
+	mod.hook('S_DUNGEON_EVENT_MESSAGE', 2, (event) => {	
 		if (!enabled || !boss) return;
 		
 		let msgId = parseInt(event.message.replace('@dungeon:', ''));
@@ -96,7 +96,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		return (boss.curHp / boss.maxHp);
 	}
 	
-	dispatch.hook('S_BOSS_GAGE_INFO', 2, (event) => {
+	mod.hook('S_BOSS_GAGE_INFO', 3, (event) => {
 		if (!enabled) return;
 		
 		if (event.huntingZoneId === BossId[0] && event.templateId === BossId[1]) {
@@ -119,7 +119,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		}
 	 })
 			
-	dispatch.hook('S_ACTION_STAGE', 1, (event) => {
+	mod.hook('S_ACTION_STAGE', 9, (event) => {
 		if (!enabled || !boss) return;
 		
 		if (boss.id - event.source == 0) {
@@ -157,12 +157,12 @@ module.exports = function VSNMLakanGuide(dispatch) {
 		if (!enabled) return;
 		
 		if (sendToParty) {
-			dispatch.toServer('C_CHAT', 1, {
+			mod.toServer('C_CHAT', 1, {
 				channel: 21, //21 = p-notice, 1 = party
 				message: msg
 			});
 		} else {
-			dispatch.toClient('S_CHAT', 1, {
+			mod.toClient('S_CHAT', 3, {
 				channel: 21, //21 = p-notice, 1 = party
 				authorName: 'DG-Guide',
 				message: msg
@@ -171,7 +171,7 @@ module.exports = function VSNMLakanGuide(dispatch) {
 	}	
 		
 	function systemMessage(msg) {
-		dispatch.toClient('S_CHAT', 1, {
+		mod.toClient('S_CHAT', 3, {
 			channel: 24, //system channel
 			authorName: '',
 			message: ' (VSNM-Lakan-Guide) ' + msg
