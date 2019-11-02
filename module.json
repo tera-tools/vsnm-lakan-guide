@@ -1,0 +1,7 @@
+{
+    "disableAutoUpdate": false,
+    "name": "vsnm-lakan-guide",
+    "author": "Neko",
+    "description": "VSNM Guide",
+    "servers": ["https://raw.githubusercontent.com/patricksantozz/vsnm-lakan-guide/master/"]
+}

@@ -1,0 +1,17 @@
+{
+    "files": {
+        "README.md": "4b1e3c1105b0babc262bbb6594bb80925f50e0c86b483844fa4a00226fc9df4d",
+        "format.js": "a0d34cfb7ab631177fbb0302e06a5858155db60afc459cd14f50b000afa2463e",
+        "index.js": "4391a133c6e4b77b2485b6beb784465d5af9c79a86e2f3b6eb04c8bb65bf8d04",
+        "module.json": "f03abdcb03de9898a6048445c94ac4cc8f092b0fa49668d882f9327c9a120cf6",
+        "vsnm-lakan-guide-preview.png": "b35a3936691d7f357b80c241d094b5104484807bb231206d469ce545b177e32f"
+    },
+    "defs": {
+        "C_CHAT": 1,
+        "C_WHISPER": 1,
+        "S_ACTION_STAGE": 9,
+        "S_BOSS_GAGE_INFO": 3,
+        "S_CHAT": 3,
+        "S_DUNGEON_EVENT_MESSAGE": 2
+    }
+}
