@@ -61,8 +61,7 @@ module.exports = function VSNMLakanGuide(mod) {
   	
 	// command support
 	try {
-		const command = require('command')
-		const command = new command(mod)
+		const command = new require('command')(mod)
 		command.on('vsnm-lakan', args => toggleModule())
 		command.on('vsnmlakan', args => toggleModule())
 		command.on('vsnm-lakan.party', args => toggleSentMessages())
@@ -121,6 +120,7 @@ module.exports = function VSNMLakanGuide(mod) {
 			
 	mod.hook('S_ACTION_STAGE', 9, (event) => {
 		if (!enabled || !boss) return;
+		if (event.stage != 0) return;
 		
 		if (boss.id - event.source == 0) {
 			 if (BossActions[event.skill]) {
